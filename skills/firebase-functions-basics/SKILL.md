@@ -46,16 +46,7 @@ Functions can be initialized using the CLI or manually. Ensure you have initiali
 
 2.  Initialize in your code:
 
-    ```typescript
-    import { initializeApp } from "firebase-admin/app";
-    import { onInit } from "firebase-functions";
-
-    onInit(() => {
-      initializeApp();
-    });
-    ```
-
-    This should be done once at the top level of your `index.ts` file.
+    Initialization logic should be added to your function's entry point (`index.ts` or `main.py`). See the language-specific references below for the correct code patterns.
 
 ### 2. Writing Functions
 
@@ -63,7 +54,7 @@ For Node.js, see [references/node_setup.md](references/node_setup.md). For Pytho
 
 ### 3. Local Development & Deployment
 
-The CLI will prompt for a secret's value at deploy time. Alternatively, a human can set the secret using the Firebase CLI command:
+The CLI will prompt for a secret's value at deploy time. Since agents cannot handle interactive prompts, **always** ensure secrets are set using the Firebase CLI command before deploying:
 
 ```bash
 firebase functions:secrets:set <SECRET_NAME>
