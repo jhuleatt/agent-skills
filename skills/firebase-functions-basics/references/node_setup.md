@@ -4,6 +4,12 @@ This guide provides a step-by-step process for setting up Cloud Functions, tailo
 
 ## 1. Create a 2nd-gen HTTP function
 
+Ensure `firebase-admin` is installed so your function can interact with other Firebase services:
+
+```bash
+npm install firebase-admin
+```
+
 Replace the contents of `src/index.ts` (or `index.js`) with the following code to create a simple, modern v2 HTTP endpoint.
 
 ```typescript
@@ -11,6 +17,10 @@ import { onRequest } from "firebase-functions/https";
 import { onDocumentCreated } from "firebase-functions/firestore";
 import * as logger from "firebase-functions/logger";
 import { defineString, defineInt } from "firebase-functions/params";
+import { onInit } from "firebase-functions";
+import { initializeApp } from "firebase-admin/app";
+
+onInit(() => initializeApp());
 
 // Configurable parameters
 const scaleLimit = defineInt("MAX_INSTANCES", { default: 1 });
